@@ -1,4 +1,8 @@
 .el-table-ext {
+  &::before {
+    display: none;
+  }
+
   // 分页
   .el-pagination {
     position: relative;

@@ -6,10 +6,11 @@
 
     <el-table-ext
       ref="table"
+      height="250px"
       :columns="columns"
       :query="query"
-      height="250px"
       :pager="{ pageSize: 100 }"
+      :options="{ emptyText: '未查询到记录', stripe: true }"
     >
       <!-- 性别 -->
       <template v-slot:sex="{ row, column, value, index }">
@@ -36,7 +37,7 @@ Vue.prototype.$option = {
   status: [{
     text: '在线',
     value: 1,
-    class: 'text-green'
+    class: 'text-blue'
   }, {
     text: '离线',
     value: 2,
@@ -146,7 +147,6 @@ export default {
     showDetail (row) {
       alert(JSON.stringify(row))
     }
-
   }
 }
 </script>
@@ -168,6 +168,16 @@ export default {
     line-height: 40px;
     font-size: 14px;
     border-bottom: 1px solid #EBEEF5;
+  }
+
+  /deep/ {
+    .text-blue {
+      color: #09f;
+    }
+
+    .text-gray {
+      color: gray;
+    }
   }
 }
 </style>
