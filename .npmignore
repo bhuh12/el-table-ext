@@ -1,0 +1,20 @@
+# 忽略目录/文件
+dist/lib/**.html
+node_modules
+demo
+dist/demo
+public
+scripts
+src
+
+
+# 忽略指定文件
+yarn.lock
+babel.config.js
+tsconfig.json
+tslint.json
+vue.config.js
+
+.github
+.editorconfig
+.travis.yml
