@@ -23,7 +23,7 @@
     "demo:build": "vue-cli-service build",
     "lib:build": "vue-cli-service build --target lib lib/index.js",
     "lib:build:report": "vue-cli-service build --report --target lib lib/index.js",
-    "lib:publish": "npm run lib:build && npm publish",
+    "lib:publish": "npm run lib:build && npm run changelog && npm publish",
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix",
     "commit": "git-cz",

@@ -59,6 +59,7 @@ Element Table 组件增强
 ## Install 安装
 
 ### Install npm
+
 ```shell
 // yarn
 yarn add el-table-ext
@@ -85,7 +86,7 @@ Vue.use(ElTableExt, { ElTable })
 ```
 
 
-## Use 使用说明
+# Use 使用说明
 
 参考 [Demo](./src/App.vue)
 
@@ -140,3 +141,6 @@ Table 支持 Element Table / Pagination 组件的所有事件
 |---- |---- |---- |
 | load | 加载表格数据 | — |
 | jumpPage | 分页跳转 | page = 1 |
+
+
+## [Changelog 更新日志](CHANGELOG.md)
