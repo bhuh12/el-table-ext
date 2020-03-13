@@ -1,3 +1,12 @@
+## [0.0.3](https://github.com/bhuh12/el-table-ext/compare/v0.0.2...v0.0.3) (2020-03-13)
+
+
+### Bug Fixes
+
+* 解决 Table 设置 rowKey 后 queryData 为 null 导致 El-Table 报错 ([5446c94](https://github.com/bhuh12/el-table-ext/commit/5446c94dbc95577b1cae85e229bd6d5ac6708585))
+
+
+
 ## [0.0.2](https://github.com/bhuh12/el-table-ext/compare/v0.0.1...v0.0.2) (2020-02-24)
 
 

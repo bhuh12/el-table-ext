@@ -1,6 +1,6 @@
 {
   "name": "el-table-ext",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Vue table component based on el-table of Element UI",
   "keywords": [
     "table",

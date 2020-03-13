@@ -1450,7 +1450,7 @@ var defaultPager = {
     // 列表展示数据
     // TODO: 静态数据分页过滤排序
     tableData: function tableData() {
-      return this.isStatic ? this.data : this.queryData;
+      return (this.isStatic ? this.data : this.queryData) || [];
     },
     // 选择
     selection: function selection() {
