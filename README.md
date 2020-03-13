@@ -1,4 +1,4 @@
-<h2 align="center">el-table-ext</h2>
+<h2 align="center">Element Table Extend</h2>
 
 <p align="center">
   <a target="_blank" href="https://www.travis-ci.org/bhuh12/el-table-ext">

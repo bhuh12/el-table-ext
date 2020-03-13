@@ -10,7 +10,12 @@
       :columns="columns"
       :query="query"
       :pager="{ pageSize: 100 }"
-      :options="{ emptyText: '未查询到记录', stripe: true }"
+      :options="{
+        emptyText: '未查询到记录',
+        stripe: true,
+        rowKey: 'id',
+        highlightCurrentRow: true
+      }"
     >
       <!-- 性别 -->
       <template v-slot:sex="{ row, column, value, index }">
@@ -128,7 +133,7 @@ export default {
           resolve({
             // 列表数据
             data: Array.from(new Array(pagin.pageSize), (item, index) => ({
-              id: Math.floor(Math.random() * 1000),
+              id: index, // Math.floor(Math.random() * 1000),
               name: this.search || '李四',
               sex: Math.floor(Math.random() * 2),
               type: Math.ceil(Math.random() * 2),
