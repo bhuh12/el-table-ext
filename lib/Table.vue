@@ -13,7 +13,7 @@
     v-on="$listeners"
   >
     <el-table-column
-      v-for="col in columns"
+      v-for="col in cols"
       :key="col.prop"
       :column-key="col.prop"
       v-bind="col"
