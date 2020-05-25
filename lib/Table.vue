@@ -40,6 +40,7 @@
     </el-table-column>
 
     <el-pagination
+      v-if="pager"
       ref="pagin"
       v-bind="pagin"
       @size-change="changeSize"

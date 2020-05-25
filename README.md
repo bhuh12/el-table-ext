@@ -95,14 +95,14 @@ Vue.use(ElTableExt, { ElTable })
 
 | 参数 | 说明 | 类型 | 必需 | 可选值 | 默认值 |
 |---- |---- |---- |---- |---- |---- |
-| columns | 列数据，参考 [Table-column Attributes 列属性](#table-column-attributes-%e5%88%97%e5%b1%9e%e6%80%a7) | Array | 是 | — | — |
+| columns | 列数据<br>参考 [Table-column Attributes 列属性](#table-column-attributes-%e5%88%97%e5%b1%9e%e6%80%a7) | Array | 是 | — | — |
 | data | 静态列表数据 | Array | — | — | — |
 | query | 异步查询列表数据，成功后返回 Promise.resolve({ data: Array, total: Number }) | Function({ pagin, filters, sorts }) | — | — | — |
-| pager | 分页选项，参考 [Element - Pagination 分页](https://element.eleme.cn/#/zh-CN/component/pagination) | Object | — | — | — |
+| pager | 分页选项，为 `false` 则禁用分页<br>参考 [Element - Pagination 分页](https://element.eleme.cn/#/zh-CN/component/pagination) | Object, Boolean | — | — | — |
 | auto-load | 是否自动加载 | Boolean | — | — | `true` |
 | default-sort | 默认排序，远程排序需要配置对应字段 `sortable: 'custom'` | Object{prop, order} | — | `order`: ascending, descending | — |
 | height | 列表高度 | String | — | — | — |
-| options | 扩展 el-table 配置，参考 [Element - Table 表格](https://element.eleme.cn/#/zh-CN/component/table) | Object | — | — | — |
+| options | 扩展 el-table 配置<br>参考 [Element - Table 表格](https://element.eleme.cn/#/zh-CN/component/table) | Object | — | — | — |
 
 
 ## Table-column Attributes 列属性
