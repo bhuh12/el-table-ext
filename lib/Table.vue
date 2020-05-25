@@ -7,6 +7,7 @@
     :data="tableData"
     :height="height"
     :default-sort="defaultSort"
+    :empty-text="errorMessage || emptyText"
     @sort-change="sortChange"
     @filter-change="filterChange"
     @hook:mounted="tableMounted"
