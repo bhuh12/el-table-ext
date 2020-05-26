@@ -1,3 +1,12 @@
+## [0.0.5](https://github.com/bhuh12/el-table-ext/compare/v0.0.4...v0.0.5) (2020-05-26)
+
+
+### Bug Fixes
+
+* 数据更改或组件激活时更新布局，解决 fixed 布局错乱问题 ([1a39e9e](https://github.com/bhuh12/el-table-ext/commit/1a39e9ea68c14e90f5f6a02c9753919771f2af56))
+
+
+
 ## [0.0.4](https://github.com/bhuh12/el-table-ext/compare/v0.0.3...v0.0.4) (2020-05-25)
 
 
