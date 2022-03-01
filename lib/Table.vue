@@ -20,19 +20,19 @@
       v-bind="col"
     >
       <!-- 字段插槽 -->
-      <template v-if="$scopedSlots[col.prop]" v-slot:default="scope">
+      <template v-if="$scopedSlots[col.prop]" #default="scope">
         <slot :name="col.prop" v-bind="bindScope(scope)">
           {{ scope.row[col.prop] }}
         </slot>
       </template>
 
       <!-- 字段 render 渲染 -->
-      <template v-else-if="col.render" v-slot:default="scope">
+      <template v-else-if="col.render" #default="scope">
         <column-render :render="col.render" v-bind="bindScope(scope)" />
       </template>
 
       <!-- 头部字段插槽 -->
-      <template v-if="$scopedSlots['header:' + col.prop]" v-slot:header="scope">
+      <template v-if="$scopedSlots['header:' + col.prop]" #header="scope">
         <slot :name="'header:' + col.prop" v-bind="bindScope(scope)">
           {{ scope.column.label }}
         </slot>

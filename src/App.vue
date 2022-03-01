@@ -1,7 +1,12 @@
 <template>
   <div class="demo-page">
-    <header>
-      已选中 {{ selection.length }} 项
+    <header class="demo-header">
+      <div class="demo-header__text">已选中 {{ selection.length }} 项</div>
+
+      <div class="demo-header__actions">
+        <ElButton type="primary" @click="addCol">新增列</ElButton>
+        <ElButton @click="modifyCol">修改末列</ElButton>
+      </div>
     </header>
 
     <el-table-ext
@@ -18,14 +23,12 @@
       }"
     >
       <!-- 性别 -->
-      <template v-slot:sex="{ row, column, value, index }">
+      <template #sex="{ value }">
         {{ ['男', '女'][value] }}
       </template>
 
-      <template v-slot:operate="{ row, column, value, index }">
-        <el-link @click="showDetail(row)">
-          详情
-        </el-link>
+      <template #operate="{ row }">
+        <el-link @click="showDetail(row)"> 详情 </el-link>
       </template>
     </el-table-ext>
   </div>
@@ -39,29 +42,35 @@ Vue.filter('datetime', val => new Date(val).toLocaleString())
 
 // 原型挂载选项
 Vue.prototype.$option = {
-  status: [{
-    text: '在线',
-    value: 1,
-    class: 'text-blue'
-  }, {
-    text: '离线',
-    value: 2,
-    class: 'text-gray'
-  }]
+  status: [
+    {
+      text: '在线',
+      value: 1,
+      class: 'text-blue'
+    },
+    {
+      text: '离线',
+      value: 2,
+      class: 'text-gray'
+    }
+  ]
 }
 
 // 内部选项
-const types = [{
-  text: '学生',
-  value: 1
-}, {
-  text: '老师',
-  value: 2
-}]
+const types = [
+  {
+    text: '学生',
+    value: 1
+  },
+  {
+    text: '老师',
+    value: 2
+  }
+]
 
 export default {
   name: 'App',
-  data () {
+  data() {
     return {
       mounted: false,
 
@@ -72,62 +81,70 @@ export default {
 
   computed: {
     // 选择项
-    selection () {
+    selection() {
       return this.mounted ? this.$refs.table.selection : []
     }
   },
 
-  mounted () {
+  mounted() {
     this.mounted = true
   },
 
   methods: {
     // 列表字段
-    getColumns () {
-      return [{
-        prop: 'selection',
-        type: 'selection',
-        fixed: true
-      }, {
-        prop: 'id',
-        label: 'ID',
-        fixed: true // 固定左侧
-      }, {
-        prop: 'name',
-        label: '姓名',
-        minWidth: 150,
-        sortable: 'custom' // 远程排序
-      }, {
-        prop: 'sex',
-        label: '性别'
-      }, {
-        prop: 'type',
-        label: '身份',
-        filters: types, // 筛选
-        renderOption: types // 渲染数组选项 types
-      }, {
-        prop: 'status',
-        label: '状态',
-        filters: this.$option.status,
-        filterMultiple: false, // 单选筛选
-        renderOption: 'status' // 渲染 Vue.prototype.$option.status 选项
-      }, {
-        prop: 'time',
-        label: '时间',
-        width: 180,
-        formatter: 'datetime' // 配置组件或全局过滤器格式化内容
-      }, {
-        prop: 'operate',
-        label: '操作',
-        fixed: 'right', // 固定右侧
-        width: 120
-      }]
+    getColumns() {
+      return [
+        {
+          prop: 'selection',
+          type: 'selection',
+          fixed: true
+        },
+        {
+          prop: 'id',
+          label: 'ID',
+          fixed: true // 固定左侧
+        },
+        {
+          prop: 'name',
+          label: '姓名',
+          minWidth: 150,
+          sortable: 'custom' // 远程排序
+        },
+        {
+          prop: 'sex',
+          label: '性别'
+        },
+        {
+          prop: 'type',
+          label: '身份',
+          filters: types, // 筛选
+          renderOption: types // 渲染数组选项 types
+        },
+        {
+          prop: 'status',
+          label: '状态',
+          filters: this.$option.status,
+          filterMultiple: false, // 单选筛选
+          renderOption: 'status' // 渲染 Vue.prototype.$option.status 选项
+        },
+        {
+          prop: 'time',
+          label: '时间',
+          width: 180,
+          formatter: 'datetime' // 配置组件或全局过滤器格式化内容
+        },
+        {
+          prop: 'operate',
+          label: '操作',
+          fixed: 'right', // 固定右侧
+          width: 120
+        }
+      ]
     },
 
     // 查询列表
-    query ({ pagin, filters, sorts }) {
-      console.log(pagin, filters, sorts)
-      return new Promise((resolve, reject) => {
+    query({ pagin }) {
+      return new Promise(resolve => {
         setTimeout(() => {
           // 模拟数据
           resolve({
@@ -149,8 +166,32 @@ export default {
     },
 
     // 打印数据
-    showDetail (row) {
+    showDetail(row) {
       alert(JSON.stringify(row))
+    },
+
+    // 新加列
+    addCol() {
+      const { columns } = this
+      const { length } = columns
+      columns.push({
+        prop: `Col${length}`,
+        label: `新增字段[${length}]`,
+        formatter(row, column, value, index) {
+          return column.label + ',' + index
+        }
+      })
+    },
+
+    // 更改列
+    modifyCol() {
+      const { columns } = this
+      this.$set(columns, columns.length - 1, {
+        label: '最后一个',
+        formatter(row, column, value, index) {
+          return column.label + ',' + index
+        }
+      })
     }
   }
 }
@@ -168,14 +209,17 @@ export default {
   box-sizing: border-box;
   background: #fff;
 
-  header {
-    padding: 0 3px;
-    line-height: 40px;
+  .demo-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
     font-size: 14px;
-    border-bottom: 1px solid #EBEEF5;
+    line-height: 40px;
+    border-bottom: 1px solid #ebeef5;
   }
 
-  /deep/ {
+  ::v-deep {
     .text-blue {
       color: #09f;
     }

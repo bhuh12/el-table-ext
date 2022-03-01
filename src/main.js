@@ -12,9 +12,9 @@ import App from './App.vue'
 Vue.config.productionTip = false
 Vue.config.devtools = true
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, { size: 'mini' })
 Vue.use(ElTableExt, { ElTable })
 
 new Vue({
-  render: (h) => h(App)
+  render: h => h(App)
 }).$mount('#app')
