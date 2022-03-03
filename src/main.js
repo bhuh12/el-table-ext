@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 // 引入 Element
-import ElementUI, { Table as ElTable } from 'element-ui'
+import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 // 引入 el-table-ext
@@ -13,7 +13,7 @@ Vue.config.productionTip = false
 Vue.config.devtools = true
 
 Vue.use(ElementUI, { size: 'mini' })
-Vue.use(ElTableExt, { ElTable })
+Vue.use(ElTableExt)
 
 new Vue({
   render: h => h(App)

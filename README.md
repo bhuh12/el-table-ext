@@ -74,7 +74,7 @@ npm i el-table-ext -S
 import Vue from 'vue'
 
 // 引入 Element
-import ElementUI, { Table as ElTable } from 'element-ui'
+import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 // 引入 el-table-ext
@@ -82,7 +82,7 @@ import ElTableExt from 'el-table-ext'
 import 'el-table-ext/dist/lib/el-table-ext.css'
 
 Vue.use(ElementUI)
-Vue.use(ElTableExt, { ElTable })
+Vue.use(ElTableExt)
 ```
 
 # Use 使用说明
@@ -91,16 +91,17 @@ Vue.use(ElTableExt, { ElTable })
 
 ## Attributes 组件属性
 
-| 参数         | 说明                                                                                                                       | 类型                                | 必需 | 可选值                         | 默认值 |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ---- | ------------------------------ | ------ |
-| columns      | 列数据<br>参考 [Table-column Attributes 列属性](#table-column-attributes-%e5%88%97%e5%b1%9e%e6%80%a7)                      | Array                               | 是   | —                              | —      |
-| data         | 静态列表数据                                                                                                               | Array                               | —    | —                              | —      |
-| query        | 异步查询列表数据，成功后返回 Promise.resolve({ data: Array, total: Number })                                               | Function({ pagin, filters, sorts }) | —    | —                              | —      |
-| pager        | 分页选项，为 `false` 则禁用分页<br>参考 [Element - Pagination 分页](https://element.eleme.cn/#/zh-CN/component/pagination) | Object, Boolean                     | —    | —                              | —      |
-| auto-load    | 是否自动加载                                                                                                               | Boolean                             | —    | —                              | `true` |
-| default-sort | 默认排序，远程排序需要配置对应字段 `sortable: 'custom'`                                                                    | Object{prop, order}                 | —    | `order`: ascending, descending | —      |
-| height       | 列表高度                                                                                                                   | String                              | —    | —                              | —      |
-| options      | 扩展 el-table 配置<br>参考 [Element - Table 表格](https://element.eleme.cn/#/zh-CN/component/table)                        | Object                              | —    | —                              | —      |
+| 参数         | 说明                                                                                                                       | 类型                                | 必需   | 可选值                         | 默认值 |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------ | ------------------------------ | ------ |
+| columns      | 列数据<br>参考 [Table-column Attributes 列属性](#table-column-attributes-%e5%88%97%e5%b1%9e%e6%80%a7)                      | Array                               | 是     | —                              | —      |
+| data         | 静态列表数据                                                                                                               | Array                               | —      | —                              | —      |
+| query        | 异步查询列表数据，成功后返回 Promise.resolve({ data: Array, total: Number })                                               | Function({ pagin, filters, sorts }) | —      | —                              | —      |
+| pager        | 分页选项，为 `false` 则禁用分页<br>参考 [Element - Pagination 分页](https://element.eleme.cn/#/zh-CN/component/pagination) | Object, Boolean                     | —      | —                              | —      |
+| auto-load    | 是否自动加载                                                                                                               | Boolean                             | —      | —                              | `true` |
+| default-sort | 默认排序，远程排序需要配置对应字段 `sortable: 'custom'`                                                                    | Object{prop, order}                 | —      | `order`: ascending, descending | —      |
+| height       | 列表高度                                                                                                                   | String                              | —      | —                              | —      |
+| flexible     | 是否伸缩盒布局                                                                                                             | Boolean                             | `true` | —                              | —      |
+| options      | 扩展 el-table 配置<br>参考 [Element - Table 表格](https://element.eleme.cn/#/zh-CN/component/table)                        | Object                              | —      | —                              | —      |
 
 ## Table-column Attributes 列属性
 
@@ -111,7 +112,8 @@ Table 支持 Element Table 组件 column 的所有配置(参考：[Element - Tab
 | ------------ | -------------------------------------------------------------------------------------------------------- | ------------------------------------------- | ---- | ------ | ------ |
 | render       | jsx 方式渲染字段数据                                                                                     | Function(h, { row, column, value, index })  | —    | —      | —      |
 | renderOption | 渲染选项数据，展示匹配到的选项文本和 class 样式。如果为 String 则从 Vue.prototype.$option 上匹配选项列表 | String, Array[{ text, value, class }]       | —    | —      | —      |
-| formatter    | 字段格式化方法。如果为 String 则匹配列表所在组件的过滤器或全局过滤器格式化，暂不支持额外参数             | String, Function(row, column, value, index) | —    | —      | —      |
+| formatter    | 字段格式化方法。如果为 String 则匹配全局过滤器格式化，暂不支持额外参数                                   | String, Function(row, column, value, index) | —    | —      | —      |
+| sortable     | 对应列是否可以排序，如果需要远程排序请设置为 'custom'                                                    | true, false, 'custom'                       | —    | —      | false  |
 
 ## Slots 插槽
 
@@ -136,5 +138,6 @@ Table 支持 Element Table / Pagination 组件的所有事件
 | -------- | ------------ | -------- |
 | load     | 加载表格数据 | —        |
 | jumpPage | 分页跳转     | page = 1 |
+| adjust   | 更新布局     | —        |
 
 ## [Changelog 更新日志](CHANGELOG.md)
