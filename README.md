@@ -99,8 +99,8 @@ Vue.use(ElTableExt)
 | pager            | 分页选项，为 `false` 则禁用分页<br>参考 [Element - Pagination 分页](https://element.eleme.cn/#/zh-CN/component/pagination) | Object, Boolean                     | —    | —                              | —            |
 | auto-load        | 是否自动加载                                                                                                               | Boolean                             | —    | —                              | `true`       |
 | default-sort     | 默认排序，远程排序需要配置对应字段 `sortable: 'custom'`                                                                    | Object{prop, order}                 | —    | `order`: ascending, descending | —            |
-| height           | 列表高度                                                                                                                   | String                              | —    | —                              | —            |
-| flexible         | 是否伸缩盒布局                                                                                                             | Boolean                             | —    | —                              | `true`       |
+| height           | 列表高度<br>`flexible` 设置为 `false` 才生效                                                                               | String                              | —    | —                              | —            |
+| flexible         | 是否伸缩盒布局。<br>如果为 true，设置的高度将不生效                                                                        | Boolean                             | —    | —                              | `true`       |
 | empty-text       | 空数据时显示的文本内容，也可以通过 slot="empty" 设置                                                                       | String                              | —    | —                              | `'暂无数据'` |
 | empty-image      | 空数据时显示的图片                                                                                                         | String                              | —    | —                              | —            |
 | empty-image-size | 空数据图片大小（宽度）                                                                                                     | Number                              | —    | —                              | —            |
@@ -120,11 +120,12 @@ Table 支持 Element Table 组件 column 的所有配置(参考：[Element - Tab
 
 ## Slots 插槽
 
-| 插槽名          | 说明               | 作用域                        |
-| --------------- | ------------------ | ----------------------------- |
-| `[prop]`        | 自定义列的内容     | { row, column, value, index } |
-| `header:[prop]` | 自定义表头的内容   | { column, index }             |
-| empty           | 空数据时展示的内容 | —                             |
+| 插槽名          | 说明                                                                                                                                  | 作用域                        |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| `[prop]`        | 自定义列的内容                                                                                                                        | { row, column, value, index } |
+| `header:[prop]` | 自定义表头的内容                                                                                                                      | { column, index }             |
+| empty           | 空数据时展示的内容                                                                                                                    | —                             |
+| append          | 插入至表格最后一行之后的内容，如果需要对表格的内容进行无限滚动操作，可能需要用到这个 slot。若表格有合计行，该 slot 会位于合计行之上。 | —                             |
 
 ## Events 事件
 

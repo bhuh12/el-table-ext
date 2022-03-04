@@ -53,6 +53,10 @@
           />
         </slot>
       </template>
+
+      <template #append>
+        <slot name="append" />
+      </template>
     </ElTable>
 
     <ElPagination

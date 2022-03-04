@@ -41,16 +41,23 @@
         {{ ['女', '男'][value] }}
       </template>
 
+      <!-- 操作 -->
       <template #operate="{ row }">
         <ElButton type="primary" @click="showDetail(row)">详情</ElButton>
         <ElButton type="danger" @click="remove(row)">删除</ElButton>
       </template>
+
+      <div slot="append" :style="{ textAlign: 'center', padding: '15px 0' }">
+        插入至表格最后一行之后的内容，如果需要对表格的内容进行无限滚动操作，可能需要用到这个
+        slot。若表格有合计行，该 slot 会位于合计行之上。
+      </div>
     </ElTableExt>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import { getUserList, removeUser } from './api'
 
 // 全局过滤器
 Vue.filter('datetime', val => new Date(val).toLocaleString())
@@ -88,103 +95,6 @@ const types = [
     class: 'text-orange'
   }
 ]
-
-/** 模拟数据 */
-function mockData() {
-  const now = new Date()
-  const data = Array.from(
-    new Array(Math.floor(Math.random() * 1000)),
-    (i, index) =>
-      mockItem(
-        index,
-        new Date(now.getTime() - Math.random() * 2 * 365 * 24 * 60 * 60 * 1000)
-      )
-  )
-
-  // 默认倒序展示
-  data.sort((a, b) => b.index - a.index)
-  return data
-}
-
-// 初始数据
-const originData = mockData()
-
-/** 模拟数据 */
-function mockItem(index, createTime = new Date()) {
-  return {
-    index,
-    id: index + 1,
-    name: `用户${index + 1}`,
-    phone:
-      '1' +
-      Array.from(new Array(10), () => Math.floor(Math.random() * 10)).join(''),
-    sex: Math.floor(Math.random() * 2),
-    remark: Array.from(
-      new Array(Math.floor(Math.random() * 10)),
-      () => '这是很长的一段文本'
-    ).join(','),
-    type: Math.floor(Math.random() * 3),
-    status: Math.floor(Math.random() * 2),
-    createTime
-  }
-}
-
-/** 模拟 ajax  请求 */
-function mockAjax({ keyword, pagin, sorts, filters }) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      let result = [...originData]
-
-      // 排序
-      if (sorts.prop) {
-        result.sort(
-          sorts.order === 'ascending'
-            ? (a, b) => {
-                const aVal = a[sorts.prop]
-                const bVal = b[sorts.prop]
-
-                return aVal.localeCompare
-                  ? aVal.localeCompare(bVal, 'zh-CN')
-                  : aVal - bVal
-              }
-            : (a, b) => {
-                const aVal = a[sorts.prop]
-                const bVal = b[sorts.prop]
-
-                return bVal.localeCompare
-                  ? bVal.localeCompare(aVal, 'zh-CN')
-                  : bVal - aVal
-              }
-        )
-      }
-
-      // 搜索、筛选
-      if (keyword || Object.keys(filters).length) {
-        result = result.filter(item => {
-          // 搜索
-          if (
-            keyword &&
-            !item.name.includes(keyword) &&
-            !item.phone.includes(keyword)
-          )
-            return false
-
-          // 筛选
-          return !Object.entries(filters).some(
-            ([prop, val]) => !val.includes(item[prop])
-          )
-        })
-      }
-
-      const start = (pagin.currentPage - 1) * pagin.pageSize
-
-      resolve({
-        data: result.slice(start, start + pagin.pageSize),
-        total: result.length
-      })
-    }, Math.random() * 500 + 100)
-  })
-}
 
 export default {
   name: 'App',
@@ -284,8 +194,15 @@ export default {
     },
 
     // 查询列表
-    query({ pagin, filters, sorts }) {
-      return mockAjax({ keyword: this.keyword, pagin, filters, sorts })
+    async query({ pagin, filters, sorts }) {
+      const { data, total } = await getUserList({
+        keyword: this.keyword,
+        pagin,
+        filters,
+        sorts
+      })
+
+      return { data, total }
     },
 
     reload() {
@@ -308,7 +225,7 @@ export default {
         type: 'error'
       })
 
-      originData.splice(originData.indexOf(row), 1)
+      await removeUser(row.id)
 
       this.$message.success(`“${row.name}”删除成功`)
 
