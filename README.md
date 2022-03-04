@@ -117,6 +117,7 @@ Table 支持 Element Table 组件 column 的所有配置(参考：[Element - Tab
 | renderOption | 渲染选项数据，展示匹配到的选项文本和 class 样式。如果为 String 则从 Vue.prototype.$option 上匹配选项列表 | String, Array[{ text, value, class }]       | —    | —      | —      |
 | formatter    | 字段格式化方法。如果为 String 则匹配全局过滤器格式化，暂不支持额外参数                                   | String, Function(row, column, value, index) | —    | —      | —      |
 | sortable     | 对应列是否可以排序，如果需要远程排序请设置为 'custom'                                                    | true, false, 'custom'                       | —    | —      | false  |
+| visible      | 对应列是否显示                                                                                           | Boolean                                     | —    | —      | true   |
 
 ## Slots 插槽
 

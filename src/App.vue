@@ -6,6 +6,27 @@
       <div class="demo-header__actions">
         <ElButton type="primary" @click="addCol">新增列</ElButton>
         <ElButton @click="modifyCol">修改末列</ElButton>
+
+        <ElPopover
+          placement="top-start"
+          width="200"
+          trigger="hover"
+          class="actions-popover-wrapper"
+          popper-class="actions-popover"
+        >
+          <ElButton slot="reference">显示/隐藏列</ElButton>
+
+          <ElForm label-width="100px">
+            <ElFormItem
+              v-for="(item, index) in columns"
+              v-show="!!item.label"
+              :key="item.prop + index"
+              :label="item.label"
+            >
+              <ElSwitch v-model="item.visible" />
+            </ElFormItem>
+          </ElForm>
+        </ElPopover>
       </div>
 
       <div class="demo-header__search">
@@ -119,6 +140,11 @@ export default {
 
   mounted() {
     this.mounted = true
+
+    // 初始列显示
+    this.columns.forEach(item => {
+      this.$set(item, 'visible', true)
+    })
   },
 
   methods: {
@@ -239,6 +265,7 @@ export default {
       columns.push({
         prop: `Col${length}`,
         label: `新增字段[${length}]`,
+        visible: true,
         formatter(row, column, value, index) {
           return column.label + ',' + index
         }
@@ -250,6 +277,7 @@ export default {
       const { columns } = this
       this.$set(columns, columns.length - 1, {
         label: '最后一个',
+        visible: true,
         formatter(row, column, value, index) {
           return column.label + ',' + index
         }
@@ -285,6 +313,18 @@ export default {
       flex: auto;
       align-items: center;
       margin-left: 20px;
+
+      .actions-popover-wrapper {
+        margin-left: 10px;
+
+        ::v-deep {
+          .el-popover__reference-wrapper {
+            display: flex;
+            align-items: center;
+            height: 100%;
+          }
+        }
+      }
     }
 
     &__search {
@@ -317,6 +357,14 @@ export default {
     .text-gray {
       color: gray;
     }
+  }
+}
+</style>
+
+<style lang="scss">
+.actions-popover {
+  .el-form-item {
+    margin-bottom: 6px;
   }
 }
 </style>
