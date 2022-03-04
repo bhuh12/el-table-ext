@@ -29,10 +29,10 @@
       :columns="columns"
       :query="query"
       :pager="{ pageSize: 100 }"
+      empty-text="未查询到记录"
       :options="{
         stripe: true,
         rowKey: 'id',
-        emptyText: '未查询到记录',
         highlightCurrentRow: true
       }"
     >

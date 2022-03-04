@@ -91,17 +91,20 @@ Vue.use(ElTableExt)
 
 ## Attributes 组件属性
 
-| 参数         | 说明                                                                                                                       | 类型                                | 必需   | 可选值                         | 默认值 |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ------ | ------------------------------ | ------ |
-| columns      | 列数据<br>参考 [Table-column Attributes 列属性](#table-column-attributes-%e5%88%97%e5%b1%9e%e6%80%a7)                      | Array                               | 是     | —                              | —      |
-| data         | 静态列表数据                                                                                                               | Array                               | —      | —                              | —      |
-| query        | 异步查询列表数据，成功后返回 Promise.resolve({ data: Array, total: Number })                                               | Function({ pagin, filters, sorts }) | —      | —                              | —      |
-| pager        | 分页选项，为 `false` 则禁用分页<br>参考 [Element - Pagination 分页](https://element.eleme.cn/#/zh-CN/component/pagination) | Object, Boolean                     | —      | —                              | —      |
-| auto-load    | 是否自动加载                                                                                                               | Boolean                             | —      | —                              | `true` |
-| default-sort | 默认排序，远程排序需要配置对应字段 `sortable: 'custom'`                                                                    | Object{prop, order}                 | —      | `order`: ascending, descending | —      |
-| height       | 列表高度                                                                                                                   | String                              | —      | —                              | —      |
-| flexible     | 是否伸缩盒布局                                                                                                             | Boolean                             | `true` | —                              | —      |
-| options      | 扩展 el-table 配置<br>参考 [Element - Table 表格](https://element.eleme.cn/#/zh-CN/component/table)                        | Object                              | —      | —                              | —      |
+| 参数             | 说明                                                                                                                       | 类型                                | 必需 | 可选值                         | 默认值       |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------- | ---- | ------------------------------ | ------------ |
+| columns          | 列数据<br>参考 [Table-column Attributes 列属性](#table-column-attributes-%e5%88%97%e5%b1%9e%e6%80%a7)                      | Array                               | 是   | —                              | —            |
+| data             | 静态列表数据                                                                                                               | Array                               | —    | —                              | —            |
+| query            | 异步查询列表数据，成功后返回 Promise.resolve({ data: Array, total: Number })                                               | Function({ pagin, filters, sorts }) | —    | —                              | —            |
+| pager            | 分页选项，为 `false` 则禁用分页<br>参考 [Element - Pagination 分页](https://element.eleme.cn/#/zh-CN/component/pagination) | Object, Boolean                     | —    | —                              | —            |
+| auto-load        | 是否自动加载                                                                                                               | Boolean                             | —    | —                              | `true`       |
+| default-sort     | 默认排序，远程排序需要配置对应字段 `sortable: 'custom'`                                                                    | Object{prop, order}                 | —    | `order`: ascending, descending | —            |
+| height           | 列表高度                                                                                                                   | String                              | —    | —                              | —            |
+| flexible         | 是否伸缩盒布局                                                                                                             | Boolean                             | —    | —                              | `true`       |
+| empty-text       | 空数据时显示的文本内容，也可以通过 slot="empty" 设置                                                                       | String                              | —    | —                              | `'暂无数据'` |
+| empty-image      | 空数据时显示的图片                                                                                                         | String                              | —    | —                              | —            |
+| empty-image-size | 空数据图片大小（宽度）                                                                                                     | Number                              | —    | —                              | —            |
+| options          | 扩展 el-table 配置<br>参考 [Element - Table 表格](https://element.eleme.cn/#/zh-CN/component/table)                        | Object                              | —    | —                              | —            |
 
 ## Table-column Attributes 列属性
 
@@ -117,10 +120,11 @@ Table 支持 Element Table 组件 column 的所有配置(参考：[Element - Tab
 
 ## Slots 插槽
 
-| 插槽名          | 说明             | 作用域                        |
-| --------------- | ---------------- | ----------------------------- |
-| `[prop]`        | 自定义列的内容   | { row, column, value, index } |
-| `header:[prop]` | 自定义表头的内容 | { column, index }             |
+| 插槽名          | 说明               | 作用域                        |
+| --------------- | ------------------ | ----------------------------- |
+| `[prop]`        | 自定义列的内容     | { row, column, value, index } |
+| `header:[prop]` | 自定义表头的内容   | { column, index }             |
+| empty           | 空数据时展示的内容 | —                             |
 
 ## Events 事件
 

@@ -11,7 +11,6 @@
       :data="tableData"
       :height="tableHeight"
       :default-sort="defaultSort"
-      :empty-text="errorMessage || emptyText"
       @sort-change="sortChange"
       @filter-change="filterChange"
       @hook:mounted="tableMounted"
@@ -42,6 +41,18 @@
           </slot>
         </template>
       </ElTableColumn>
+
+      <slot />
+
+      <template #empty>
+        <slot name="empty">
+          <ElEmpty
+            :description="errorMessage || emptyText || options.emptyText"
+            :image="emptyImage"
+            :image-size="emptyImageSize"
+          />
+        </slot>
+      </template>
     </ElTable>
 
     <ElPagination
