@@ -1,11 +1,22 @@
 import { mockAjax } from './utils'
 import { mockAllUserList } from './mock'
+import { ExtTableFilter, ExtTablePagin, ExtTableSorts } from '../lib'
 
 /** 所用用户列表 */
 const allUserList = mockAllUserList()
 
 /** 查询用户数据 */
-export function getUserList({ keyword, pagin, sorts, filters }) {
+export function getUserList({
+  keyword,
+  pagin,
+  sorts,
+  filters
+}: {
+  keyword: string
+  pagin: ExtTablePagin
+  sorts: ExtTableSorts
+  filters: ExtTableFilter
+}) {
   return mockAjax(() => {
     let result = [...allUserList]
 
@@ -60,7 +71,7 @@ export function getUserList({ keyword, pagin, sorts, filters }) {
 }
 
 /** 删除用户 */
-export function removeUser(id) {
+export function removeUser(id: string) {
   return mockAjax(() => {
     const item = allUserList.find(item => item.id === id)
 

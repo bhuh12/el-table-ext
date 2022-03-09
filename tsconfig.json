@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": true,
+    "jsx": "preserve",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "baseUrl": ".",
+    "paths": {
+      "el-table-ext": ["demo"]
+    },
+    "lib": ["esnext", "dom"]
+  },
+  "vueCompilerOptions": {
+    "experimentalCompatMode": 2,
+    "experimentalTemplateCompilerOptions": {
+      "compatConfig": { "MODE": 2 } // optional
+    }
+  },
+
+  "include": [
+    "lib/**/*.ts",
+    "lib/**/*.tsx",
+    "lib/**/*.vue",
+    "demo/**/*.ts",
+    "demo/**/*.tsx",
+    "demo/**/*.vue"
+  ],
+  "exclude": ["node_modules", "scripts"]
+}
