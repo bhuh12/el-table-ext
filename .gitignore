@@ -22,5 +22,4 @@ yarn-error.log*
 node_modules
 
 # 发布输出目录
-dist/demo
-dist/lib/**.html
+dist

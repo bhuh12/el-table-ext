@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueCompotition from '@vue/composition-api'
 
 // 引入 Element
 import ElementUI from 'element-ui'
@@ -12,6 +13,7 @@ import App from './App.vue'
 Vue.config.productionTip = false
 Vue.config.devtools = true
 
+Vue.use(VueCompotition)
 Vue.use(ElementUI, { size: 'mini' })
 Vue.use(ElTableExt)
 

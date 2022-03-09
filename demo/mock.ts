@@ -1,3 +1,15 @@
+export interface User {
+  index: number
+  id: string
+  name: string
+  phone: string
+  sex: string
+  remark: string
+  type: number
+  status: number
+  createTime: Date
+}
+
 /** 模拟所有数据 */
 export function mockAllUserList() {
   const now = new Date()
@@ -16,10 +28,10 @@ export function mockAllUserList() {
 }
 
 /** 模拟用户数据 */
-function mockUser(index, createTime = new Date()) {
+function mockUser(index: number, createTime = new Date()): User {
   return {
     index,
-    id: index + 1,
+    id: index + 1 + '',
     name: `用户${index + 1}`,
     phone:
       '1' +

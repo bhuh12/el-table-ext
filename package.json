@@ -17,55 +17,59 @@
   "bugs": {
     "url": "https://github.com/bhuh12/el-table-ext/issues"
   },
-  "main": "dist/lib/el-table-ext.umd.min.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "types": "dist/lib/index.d.ts",
+  "main": "dist/el-table-ext.umd.js",
+  "module": "dist/el-table-ext.umd.es.js",
+  "sideEffects": false,
   "scripts": {
-    "demo:dev": "vue-cli-service serve --open",
-    "demo:build": "vue-cli-service build",
-    "lib:build": "vue-cli-service build --target lib lib/index.js",
-    "lib:build:report": "vue-cli-service build --report --target lib lib/index.js",
-    "lib:publish": "npm run lib:build && npm run changelog && npm publish",
-    "lint": "vue-cli-service lint",
-    "lint:fix": "vue-cli-service lint --fix",
-    "commit": "git-cz",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+    "dev": "vite --config demo/vite.config.ts",
+    "demo:build": "vite build --config demo/vite.config.ts",
+    "demo:preview": "vite preview --config demo/vite.config.ts",
+    "build": "vite build",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1",
+    "lint": "yarn run lint:script --write && yarn run lint:html --write",
+    "lint:ts": "vue-tsc --noEmit",
+    "lint:script": "prettier -c --parser typescript \"{src,demo}/**/*.[jt]s?(x)\"",
+    "lint:html": "prettier -c --parser html \"demo/**/*.html\""
   },
   "dependencies": {
     "element-ui": "^2.15.6",
     "vue": "^2.6.14"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.15",
-    "@vue/cli-plugin-eslint": "~4.5.15",
-    "@vue/cli-plugin-router": "~4.5.15",
-    "@vue/cli-service": "~4.5.15",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "@vitejs/plugin-legacy": "^1.7.1",
+    "@vue/compiler-sfc": "^3.2.31",
+    "@vue/composition-api": "^1.4.9",
     "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "conventional-changelog-cli": "^2.1.1",
-    "core-js": "^3.21.1",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-vue": "^7.9.0",
-    "lint-staged": "^12.3.4",
-    "sass": "^1.49.8",
-    "sass-loader": "^8.0.2",
+    "@vue/eslint-config-typescript": "^9.1.0",
+    "@vue/runtime-dom": "^3.2.31",
+    "conventional-changelog-cli": "^2.2.2",
+    "eslint": "^8.10.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-vue": "^8.5.0",
+    "lint-staged": "^12.3.5",
+    "prettier": "^2.4.0",
+    "sass": "^1.49.9",
     "stylelint": "^13.13.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-recommended": "^5.0.0",
     "stylelint-order": "^4.1.0",
-    "stylelint-scss": "^3.19.0",
-    "vue-template-compiler": "^2.6.14"
+    "stylelint-scss": "^3.21.0",
+    "typescript": "^4.6.2",
+    "vite": "^2.8.6",
+    "vite-plugin-dts": "^0.9.9",
+    "vite-plugin-vue2": "^1.9.3",
+    "vue-template-compiler": "^2.6.14",
+    "vue-tsc": "^0.32.1",
+    "yorkie": "^2.0.0"
   },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
   "gitHooks": {
     "pre-commit": "lint-staged",
     "commit-msg": "node scripts/verifyCommit.js"

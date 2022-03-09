@@ -29,7 +29,7 @@ module.exports = {
     'font-family-no-missing-generic-family-keyword': [
       true,
       {
-        ignoreFontFamilies: ['rt-icon', 'element-icons']
+        ignoreFontFamilies: ['el-icon']
       }
     ],
 
